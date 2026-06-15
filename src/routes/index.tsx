@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
 
 const tacos = [
   { name: "Tacos Classic", desc: "Viande hachée, cheddar fondu, frites maison", img: tacosClassic, tag: "Le best-seller" },
-  { name: "Crousty Maestro", desc: "Tenders croustillants, sauce fromagère, chips de tortilla", img: tacosChickenAsset.url, tag: "La tendance" },
+  { name: "Crousty Maestro", desc: "Tenders croustillants, sauce fromagère, chips de tortilla", img: tacosChicken, tag: "La tendance" },
   { name: "Maestro Bowl", desc: "Sans tortilla : tenders, frites, cheddar & sauce signature", img: tacosBowl, tag: "Signature" },
   { name: "Tacos à Composer", desc: "Viandes au choix, frites & sauces : compose ton Maestro", img: tacosXXL, tag: "Sur-mesure" },
 ];
