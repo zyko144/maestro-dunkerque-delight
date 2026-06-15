@@ -1,22 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
-import heroBurger from "@/assets/hero-burger.jpg";
-import tenders from "@/assets/tenders.jpg";
-import tacos from "@/assets/tacos.jpg";
-import burger2 from "@/assets/burger2.jpg";
-import { Phone, MapPin, Clock, Star, Bike, ShoppingBag, Flame } from "lucide-react";
+import bgAsset from "@/assets/maestro-bg.png.asset.json";
+import tacosBeef from "@/assets/tacos-beef.jpg";
+import tacosChicken from "@/assets/tacos-chicken.jpg";
+import tacosMerguez from "@/assets/tacos-merguez.jpg";
+import tacosMix from "@/assets/tacos-mix.jpg";
+import cheesyFries from "@/assets/cheesy-fries.jpg";
+import nuggets from "@/assets/nuggets.jpg";
+import { Phone, MapPin, Clock, Star, Bike, ShoppingBag, Flame, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Maestro Dunkerque — Burgers, Tacos & Tenders à emporter" },
-      { name: "description", content: "Maestro Dunkerque, 1 Place de la Gare. Burgers, tacos, tenders. À emporter & livraison. Ouvert jusqu'à 22h. ☎ 03 28 25 41 48" },
-      { property: "og:title", content: "Maestro Dunkerque — Le goût de la rue" },
-      { property: "og:description", content: "Le fast food n°1 à Dunkerque. Note 4,4★ (2,3k avis). À emporter & livraison." },
+      { title: "Maestro Dunkerque — Le Roi du Tacos à Dunkerque" },
+      { name: "description", content: "Maestro Dunkerque · 1 Pl. de la Gare. Tacos français généreux, viandes au choix, sauces maison. À emporter & livraison. ☎ 03 28 25 41 48" },
+      { property: "og:title", content: "Maestro Dunkerque — Le Chef c'est vous !" },
+      { property: "og:description", content: "Tacos signature, menus XXL, sauces maison. 4,4★ sur 2 300+ avis." },
       { property: "og:type", content: "restaurant" },
       { property: "og:url", content: "/" },
-      { property: "og:image", content: heroBurger },
+      { property: "og:image", content: bgAsset.url },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: heroBurger },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [{
@@ -25,17 +27,11 @@ export const Route = createFileRoute("/")({
         "@context": "https://schema.org",
         "@type": "FastFoodRestaurant",
         name: "Maestro Dunkerque",
-        image: heroBurger,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "1 Place de la Gare",
-          addressLocality: "Dunkerque",
-          postalCode: "59140",
-          addressCountry: "FR",
-        },
+        image: bgAsset.url,
+        address: { "@type": "PostalAddress", streetAddress: "1 Place de la Gare", addressLocality: "Dunkerque", postalCode: "59140", addressCountry: "FR" },
         telephone: "+33328254148",
         priceRange: "€€",
-        servesCuisine: ["Burgers", "Tacos", "Fast Food"],
+        servesCuisine: ["Tacos", "Burgers", "Fast Food"],
         aggregateRating: { "@type": "AggregateRating", ratingValue: "4.4", reviewCount: "2300" },
         openingHours: "Mo-Su 11:00-22:00",
       }),
@@ -44,156 +40,217 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const menu = [
-  { name: "Le Maestro", desc: "Double steak, cheddar fondu, bacon, sauce maison", price: "12,90 €", img: burger2, tag: "Best-seller" },
-  { name: "Tacos Signature", desc: "Viande au choix, fromage coulant, frites à l'intérieur", price: "9,50 €", img: tacos, tag: "Coup de cœur" },
-  { name: "Tenders Crispy", desc: "Filets de poulet panés croustillants, sauces au choix", price: "8,90 €", img: tenders, tag: "Croustillant" },
-  { name: "Smash Classic", desc: "Steak smashé, cheddar, oignons caramélisés, cornichons", price: "10,50 €", img: heroBurger, tag: "Nouveau" },
+const tacos = [
+  { name: "Tacos Classic", desc: "Viande hachée, cheddar fondu, frites maison", price: "7,90 €", img: tacosBeef, tag: "Le best-seller" },
+  { name: "Tacos Crispy", desc: "Tenders de poulet, double cheese, sauce algérienne", price: "8,90 €", img: tacosChicken, tag: "Croustillant" },
+  { name: "Tacos Merguez", desc: "Merguez braisée, cheddar coulant, harissa maison", price: "8,50 €", img: tacosMerguez, tag: "Épicé" },
+  { name: "Tacos XXL Mix", desc: "Triple viande, sauce fromagère, frites à l'intérieur", price: "12,90 €", img: tacosMix, tag: "Géant" },
+];
+
+const sides = [
+  { name: "Cheesy Fries", desc: "Frites + cheddar fondu, boîte Maestro", price: "4,90 €", img: cheesyFries },
+  { name: "Nuggets & Onion Rings", desc: "12 pièces + sauces au choix", price: "6,50 €", img: nuggets },
 ];
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground relative">
+      {/* Background brick wall - fixed */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center"
+        style={{ backgroundImage: `url(${bgAsset.url})` }}
+        aria-hidden="true"
+      />
+      <div className="fixed inset-0 -z-10 bg-background/85" aria-hidden="true" />
+
       {/* NAV */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border">
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border">
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
           <a href="#top" className="flex items-center gap-2">
-            <Flame className="w-6 h-6 text-primary" />
-            <span className="font-display text-2xl tracking-wider">MAESTRO</span>
+            <span className="font-display text-3xl tracking-wide text-foreground">MAESTR<span className="text-primary">O</span></span>
           </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="#menu" className="hover:text-secondary transition">Menu</a>
-            <a href="#about" className="hover:text-secondary transition">L'enseigne</a>
-            <a href="#visit" className="hover:text-secondary transition">Nous trouver</a>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
+            <a href="#menu" className="hover:text-primary transition">Tacos</a>
+            <a href="#sides" className="hover:text-primary transition">À côté</a>
+            <a href="#about" className="hover:text-primary transition">L'enseigne</a>
+            <a href="#visit" className="hover:text-primary transition">Contact</a>
           </nav>
-          <a href="tel:+33328254148" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition shadow-fire">
+          <a href="tel:+33328254148" className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-primary text-primary-foreground text-sm font-bold uppercase hover:opacity-90 transition shadow-gold">
             <Phone className="w-4 h-4" /> <span className="hidden sm:inline">Commander</span>
           </a>
         </div>
       </header>
 
       {/* HERO */}
-      <section id="top" className="relative pt-16 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <img src={heroBurger} alt="" width={1920} height={1080} className="w-full h-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
+      <section id="top" className="relative pt-16">
+        <div className="max-w-6xl mx-auto px-5 pt-20 pb-16 md:pt-32 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 border border-primary/40 text-primary text-xs font-bold uppercase tracking-wider">
+              <Star className="w-3.5 h-3.5 fill-primary" /> 4,4 · 2 300+ avis Google
+            </div>
+            <h1 className="mt-6 font-display text-6xl sm:text-7xl md:text-8xl leading-[0.85]">
+              LE ROI<br />
+              DU <span className="text-stroke-gold">TACOS</span><br />
+              <span className="text-primary">À DUNKERQUE.</span>
+            </h1>
+            <p className="mt-2 font-display text-lg text-muted-foreground tracking-widest">— Le chef c'est vous !</p>
+            <p className="mt-6 max-w-md text-base text-muted-foreground">
+              Tortillas grillées minute, viandes au choix, sauces maison, frites à l'intérieur.
+              Le vrai tacos français, signé Maestro.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="tel:+33328254148" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-sm bg-gradient-gold text-primary-foreground font-bold uppercase tracking-wider shadow-gold hover:scale-[1.02] transition">
+                <Phone className="w-4 h-4" /> 03 28 25 41 48
+              </a>
+              <a href="#menu" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-sm border-2 border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground font-bold uppercase tracking-wider transition">
+                Voir la carte <ChevronRight className="w-4 h-4" />
+              </a>
+            </div>
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-2"><ShoppingBag className="w-4 h-4 text-primary" /> À emporter</span>
+              <span className="inline-flex items-center gap-2"><Bike className="w-4 h-4 text-primary" /> Livraison</span>
+              <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-primary" /> Ouvert · ferme 22h</span>
+            </div>
+          </div>
+
+          {/* Hero image - tacos */}
+          <div className="relative">
+            <div className="absolute -inset-8 bg-primary/20 blur-3xl rounded-full" aria-hidden="true" />
+            <img
+              src={tacosMix}
+              alt="Tacos Maestro XXL"
+              width={1024}
+              height={1024}
+              className="relative w-full h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)]"
+            />
+            <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-4 py-3 font-display text-2xl rotate-[-6deg] shadow-gold">
+              DÈS 7,90 €
+            </div>
+          </div>
         </div>
-        <div className="max-w-6xl mx-auto px-5 pt-16 pb-24 md:pt-28 md:pb-40">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 border border-secondary/30 text-secondary text-xs font-semibold">
-            <Star className="w-3.5 h-3.5 fill-secondary" /> 4,4 / 5 · 2 300+ avis Google
-          </div>
-          <h1 className="mt-6 font-display text-6xl sm:text-7xl md:text-8xl leading-[0.9]">
-            LE GOÛT <br />
-            <span className="text-stroke">DE LA RUE</span><br />
-            <span className="text-primary">À DUNKERQUE.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground">
-            Burgers smashés, tacos généreux, tenders croustillants. Préparés sur place,
-            servis chaud — à emporter ou livrés chez vous.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="tel:+33328254148" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-fire text-primary-foreground font-semibold shadow-fire hover:scale-[1.02] transition">
-              <Phone className="w-4 h-4" /> 03 28 25 41 48
-            </a>
-            <a href="#menu" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-border bg-card/60 hover:bg-card font-semibold transition">
-              Voir le menu
-            </a>
-          </div>
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-2"><ShoppingBag className="w-4 h-4 text-secondary" /> À emporter</span>
-            <span className="inline-flex items-center gap-2"><Bike className="w-4 h-4 text-secondary" /> Livraison</span>
-            <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-secondary" /> Ouvert · ferme à 22:00</span>
-            <span className="inline-flex items-center gap-2">💶 10–20 € / personne</span>
+
+        {/* Gold strip */}
+        <div className="bg-primary text-primary-foreground py-3 overflow-hidden border-y-4 border-foreground">
+          <div className="flex items-center gap-8 font-display text-xl whitespace-nowrap animate-[scroll_30s_linear_infinite]">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <span key={i} className="flex items-center gap-8">
+                LE CHEF C'EST VOUS <Flame className="w-5 h-5" />
+                TACOS SIGNATURE <Flame className="w-5 h-5" />
+                100% MAISON <Flame className="w-5 h-5" />
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* MENU */}
-      <section id="menu" className="py-20 md:py-28">
+      {/* MENU TACOS */}
+      <section id="menu" className="py-20 md:py-28 relative">
         <div className="max-w-6xl mx-auto px-5">
-          <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+          <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
             <div>
-              <span className="text-secondary text-sm font-bold tracking-widest">LA CARTE</span>
-              <h2 className="font-display text-5xl md:text-6xl mt-2">Nos best-sellers</h2>
+              <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">La Carte</span>
+              <h2 className="font-display text-5xl md:text-7xl mt-3 leading-none">
+                Nos <span className="underline-gold">Tacos</span> Signature
+              </h2>
             </div>
             <p className="text-muted-foreground max-w-sm text-sm">
-              Une carte courte, des produits frais, des portions généreuses.
-              Tout est préparé minute, devant vous.
+              Préparés minute, pressés au grill, viandes fraîches et sauces maison.
+              Au choix : viande hachée, poulet crispy, merguez, kebab.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {menu.map((item) => (
-              <article key={item.name} className="group relative overflow-hidden rounded-2xl bg-card border border-border shadow-card hover:border-primary/50 transition">
-                <div className="aspect-square overflow-hidden">
-                  <img src={item.img} alt={item.name} loading="lazy" width={1024} height={1024} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            {tacos.map((item) => (
+              <article key={item.name} className="group relative overflow-hidden rounded-sm bg-card border border-border shadow-card hover:border-primary transition-all hover:-translate-y-1 duration-300">
+                <div className="aspect-square overflow-hidden bg-background">
+                  <img src={item.img} alt={item.name} loading="lazy" width={1024} height={1024} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                 </div>
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground text-[10px] font-bold uppercase tracking-wider">{item.tag}</span>
+                <span className="absolute top-3 left-3 px-2.5 py-1 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest">{item.tag}</span>
                 <div className="p-5">
                   <div className="flex items-baseline justify-between gap-2">
                     <h3 className="font-display text-2xl">{item.name}</h3>
-                    <span className="text-primary font-bold">{item.price}</span>
+                    <span className="text-primary font-display text-xl">{item.price}</span>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SIDES */}
+      <section id="sides" className="py-20 border-t border-border bg-card/30 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto px-5">
+          <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">Pour accompagner</span>
+          <h2 className="font-display text-5xl md:text-6xl mt-3 mb-10">À côté de tes tacos</h2>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {sides.map((item) => (
+              <article key={item.name} className="group flex gap-5 items-center rounded-sm bg-card border border-border p-5 hover:border-primary transition shadow-card">
+                <img src={item.img} alt={item.name} loading="lazy" width={1024} height={1024} className="w-32 h-32 object-cover rounded-sm" />
+                <div className="flex-1">
+                  <h3 className="font-display text-3xl">{item.name}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
+                  <p className="mt-3 text-primary font-display text-2xl">{item.price}</p>
+                </div>
+              </article>
+            ))}
+          </div>
 
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            Menu complet disponible sur place · prix moyens 10–20 €
+            Formule menu : tacos + accompagnement + boisson dès <span className="text-primary font-bold">10,90 €</span>
           </p>
         </div>
       </section>
 
-      {/* ABOUT band */}
-      <section id="about" className="relative py-24 border-y border-border bg-card/40">
+      {/* ABOUT */}
+      <section id="about" className="relative py-24 border-t border-border">
         <div className="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
+          <div className="relative aspect-[4/5] overflow-hidden border-4 border-primary shadow-gold">
+            <img src={tacosBeef} alt="Tacos Maestro" loading="lazy" width={1024} height={1280} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6">
+              <p className="font-display text-3xl leading-tight">« Les meilleurs tacos de Dunkerque, sans hésiter. »</p>
+              <p className="text-xs text-muted-foreground mt-2 uppercase tracking-widest">— Avis Google ★★★★★</p>
+            </div>
+          </div>
           <div>
-            <span className="text-secondary text-sm font-bold tracking-widest">L'ENSEIGNE</span>
-            <h2 className="font-display text-5xl md:text-6xl mt-2 leading-none">
-              Le fast food <span className="text-primary">qui régale</span> Dunkerque.
+            <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">L'enseigne</span>
+            <h2 className="font-display text-5xl md:text-6xl mt-3 leading-[0.9]">
+              Le tacos<br />comme on l'<span className="text-primary">aime</span>.
             </h2>
             <p className="mt-6 text-muted-foreground leading-relaxed">
-              Depuis le cœur de Dunkerque, face à la gare, Maestro c'est l'adresse
-              incontournable pour les amateurs de bons burgers, de tacos qui débordent
-              et de poulet croustillant. Plus de <strong className="text-foreground">2 300 clients</strong>
-              {" "}nous ont noté <strong className="text-secondary">4,4 / 5</strong>.
+              Au cœur de Dunkerque, face à la gare, Maestro c'est <strong className="text-foreground">l'adresse référence</strong> pour
+              les amateurs de vrais tacos français. Pâte pressée minute, viandes au choix, sauces maison
+              et frites croustillantes à l'intérieur. Plus de <strong className="text-primary">2 300 clients</strong> nous ont noté
+              <strong className="text-primary"> 4,4 / 5</strong>.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4 text-center">
               <Stat value="4,4★" label="sur Google" />
               <Stat value="2,3k" label="avis clients" />
-              <Stat value="558" label="recommandations" />
-            </div>
-          </div>
-          <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-fire">
-            <img src={burger2} alt="Burger Maestro" loading="lazy" width={1024} height={1280} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <p className="font-display text-3xl">« Le meilleur burger de Dunkerque. »</p>
-              <p className="text-xs text-muted-foreground mt-2">— Avis Google</p>
+              <Stat value="558" label="recommandés" />
             </div>
           </div>
         </div>
       </section>
 
       {/* VISIT */}
-      <section id="visit" className="py-24">
+      <section id="visit" className="py-24 border-t border-border bg-card/30 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-5">
-          <span className="text-secondary text-sm font-bold tracking-widest">NOUS TROUVER</span>
-          <h2 className="font-display text-5xl md:text-6xl mt-2 mb-10">Venez goûter.</h2>
+          <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">Nous trouver</span>
+          <h2 className="font-display text-5xl md:text-6xl mt-3 mb-10">Viens goûter.</h2>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl overflow-hidden border border-border bg-card shadow-card">
+            <div className="overflow-hidden border-2 border-primary bg-card shadow-card">
               <iframe
                 title="Carte Maestro Dunkerque"
                 src="https://www.google.com/maps?q=1+Place+de+la+Gare,+59140+Dunkerque&output=embed"
-                className="w-full h-80 md:h-full min-h-[320px]"
+                className="w-full h-80 md:h-full min-h-[340px]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-
             <div className="space-y-4">
               <InfoCard icon={<MapPin className="w-5 h-5" />} title="Adresse">
                 1 Place de la Gare<br />59140 Dunkerque
@@ -205,10 +262,10 @@ function Home() {
                 Tous les jours · jusqu'à 22:00
               </InfoCard>
               <div className="flex gap-3 pt-2">
-                <a href="https://www.google.com/maps/dir/?api=1&destination=1+Place+de+la+Gare,+59140+Dunkerque" target="_blank" rel="noreferrer" className="flex-1 text-center px-5 py-3 rounded-full bg-gradient-fire text-primary-foreground font-semibold shadow-fire">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=1+Place+de+la+Gare,+59140+Dunkerque" target="_blank" rel="noreferrer" className="flex-1 text-center px-5 py-3.5 bg-gradient-gold text-primary-foreground font-bold uppercase tracking-wider shadow-gold">
                   Itinéraire
                 </a>
-                <a href="tel:+33328254148" className="flex-1 text-center px-5 py-3 rounded-full border border-border bg-card hover:bg-muted font-semibold">
+                <a href="tel:+33328254148" className="flex-1 text-center px-5 py-3.5 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold uppercase tracking-wider transition">
                   Appeler
                 </a>
               </div>
@@ -218,32 +275,39 @@ function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-border py-10 text-center text-sm text-muted-foreground">
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <Flame className="w-5 h-5 text-primary" />
-          <span className="font-display text-xl tracking-wider text-foreground">MAESTRO DUNKERQUE</span>
+      <footer className="border-t border-border py-10 text-center text-sm text-muted-foreground bg-background/60 backdrop-blur-sm">
+        <div className="font-display text-3xl tracking-wide text-foreground mb-2">
+          MAESTR<span className="text-primary">O</span>
         </div>
-        <p>© {new Date().getFullYear()} Maestro Dunkerque · 1 Pl. de la Gare, 59140 Dunkerque</p>
+        <p className="font-display text-xs tracking-[0.3em] text-primary mb-4">LE CHEF C'EST VOUS !</p>
+        <p>© {new Date().getFullYear()} Maestro Dunkerque · 1 Pl. de la Gare, 59140 Dunkerque · 03 28 25 41 48</p>
       </footer>
+
+      <style>{`
+        @keyframes scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
     </div>
   );
 }
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-xl bg-background/60 border border-border py-4">
-      <div className="font-display text-3xl text-secondary">{value}</div>
-      <div className="text-xs text-muted-foreground mt-1">{label}</div>
+    <div className="border-2 border-primary/60 py-4 bg-background/40">
+      <div className="font-display text-3xl text-primary">{value}</div>
+      <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">{label}</div>
     </div>
   );
 }
 
 function InfoCard({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 flex gap-4 shadow-card">
-      <div className="w-10 h-10 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0">{icon}</div>
+    <div className="border border-border bg-card p-5 flex gap-4 shadow-card hover:border-primary/60 transition">
+      <div className="w-11 h-11 bg-primary text-primary-foreground flex items-center justify-center shrink-0">{icon}</div>
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{title}</div>
+        <div className="text-xs font-bold uppercase tracking-widest text-primary">{title}</div>
         <div className="mt-1 text-foreground">{children}</div>
       </div>
     </div>
