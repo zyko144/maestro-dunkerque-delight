@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import bgAsset from "@/assets/maestro-bg.png.asset.json";
-import logoAsset from "@/assets/maestro-logo.png.asset.json";
+import logoAsset from "@/assets/maestro-logo-v2.png.asset.json";
 import tacosClassic from "@/assets/tacos-classic-real.jpg";
-import tacosChicken from "@/assets/tacos-chicken-real.jpg";
+import tacosChickenAsset from "@/assets/tacos-chicken-real.png.asset.json";
 import tacosBowl from "@/assets/tacos-bowl-real.jpg";
 import tacosXXL from "@/assets/tacos-xxl-real.jpg";
 import cheesyFries from "@/assets/cheesy-fries-real.jpg";
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
 
 const tacos = [
   { name: "Tacos Classic", desc: "Viande hachée, cheddar fondu, frites maison", img: tacosClassic, tag: "Le best-seller" },
-  { name: "Crousty Maestro", desc: "Tenders croustillants, sauce fromagère, chips de tortilla", img: tacosChicken, tag: "La tendance" },
+  { name: "Crousty Maestro", desc: "Tenders croustillants, sauce fromagère, chips de tortilla", img: tacosChickenAsset.url, tag: "La tendance" },
   { name: "Maestro Bowl", desc: "Sans tortilla : tenders, frites, cheddar & sauce signature", img: tacosBowl, tag: "Signature" },
   { name: "Tacos à Composer", desc: "Viandes au choix, frites & sauces : compose ton Maestro", img: tacosXXL, tag: "Sur-mesure" },
 ];
