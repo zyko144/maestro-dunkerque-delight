@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import bgAsset from "@/assets/maestro-bg.png.asset.json";
-import tacosBeef from "@/assets/tacos-beef.jpg";
-import tacosChicken from "@/assets/tacos-chicken.jpg";
-import tacosMerguez from "@/assets/tacos-merguez.jpg";
-import tacosMix from "@/assets/tacos-mix.jpg";
-import cheesyFries from "@/assets/cheesy-fries.jpg";
-import nuggets from "@/assets/nuggets.jpg";
+import logoAsset from "@/assets/maestro-logo.png.asset.json";
+import tacosClassic from "@/assets/tacos-classic-real.jpg";
+import tacosChicken from "@/assets/tacos-chicken-real.jpg";
+import tacosBowl from "@/assets/tacos-bowl-real.jpg";
+import tacosXXL from "@/assets/tacos-xxl-real.jpg";
+import cheesyFries from "@/assets/cheesy-fries-real.jpg";
+import sidesImg from "@/assets/sides-real.jpg";
 import { Phone, MapPin, Clock, Star, Bike, ShoppingBag, Flame, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -14,10 +15,10 @@ export const Route = createFileRoute("/")({
       { title: "Maestro Dunkerque — Le Roi du Tacos à Dunkerque" },
       { name: "description", content: "Maestro Dunkerque · 1 Pl. de la Gare. Tacos français généreux, viandes au choix, sauces maison. À emporter & livraison. ☎ 03 28 25 41 48" },
       { property: "og:title", content: "Maestro Dunkerque — Le Chef c'est vous !" },
-      { property: "og:description", content: "Tacos signature, menus XXL, sauces maison. 4,4★ sur 2 300+ avis." },
+      { property: "og:description", content: "Tacos signature, bowls, sides. 4,4★ sur 2 300+ avis." },
       { property: "og:type", content: "restaurant" },
       { property: "og:url", content: "/" },
-      { property: "og:image", content: bgAsset.url },
+      { property: "og:image", content: logoAsset.url },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -27,11 +28,11 @@ export const Route = createFileRoute("/")({
         "@context": "https://schema.org",
         "@type": "FastFoodRestaurant",
         name: "Maestro Dunkerque",
-        image: bgAsset.url,
+        image: logoAsset.url,
         address: { "@type": "PostalAddress", streetAddress: "1 Place de la Gare", addressLocality: "Dunkerque", postalCode: "59140", addressCountry: "FR" },
         telephone: "+33328254148",
         priceRange: "€€",
-        servesCuisine: ["Tacos", "Burgers", "Fast Food"],
+        servesCuisine: ["Tacos", "Bowls", "Fast Food"],
         aggregateRating: { "@type": "AggregateRating", ratingValue: "4.4", reviewCount: "2300" },
         openingHours: "Mo-Su 11:00-22:00",
       }),
@@ -41,33 +42,38 @@ export const Route = createFileRoute("/")({
 });
 
 const tacos = [
-  { name: "Tacos Classic", desc: "Viande hachée, cheddar fondu, frites maison", price: "7,90 €", img: tacosBeef, tag: "Le best-seller" },
-  { name: "Tacos Crispy", desc: "Tenders de poulet, double cheese, sauce algérienne", price: "8,90 €", img: tacosChicken, tag: "Croustillant" },
-  { name: "Tacos Merguez", desc: "Merguez braisée, cheddar coulant, harissa maison", price: "8,50 €", img: tacosMerguez, tag: "Épicé" },
-  { name: "Tacos XXL Mix", desc: "Triple viande, sauce fromagère, frites à l'intérieur", price: "12,90 €", img: tacosMix, tag: "Géant" },
+  { name: "Tacos Classic", desc: "Viande hachée, cheddar fondu, frites maison", img: tacosClassic, tag: "Le best-seller" },
+  { name: "Tacos Crispy Chicken", desc: "Poulet grillé, double cheese, sauce algérienne", img: tacosChicken, tag: "Croustillant" },
+  { name: "Tacos Bowl", desc: "Sans tortilla : viande, frites, salade & cheddar", img: tacosBowl, tag: "Healthy-ish" },
+  { name: "Tacos XXL Mix", desc: "Triple viande, sauce fromagère, frites à l'intérieur", img: tacosXXL, tag: "Géant" },
 ];
 
 const sides = [
-  { name: "Cheesy Fries", desc: "Frites + cheddar fondu, boîte Maestro", price: "4,90 €", img: cheesyFries },
-  { name: "Nuggets & Onion Rings", desc: "12 pièces + sauces au choix", price: "6,50 €", img: nuggets },
+  { name: "Cheesy Fries", desc: "Frites + cheddar fondu, bacon & ciboulette", img: cheesyFries },
+  { name: "Tenders & Onion Rings", desc: "Tenders croustillants, oignons frits & sauces", img: sidesImg },
 ];
+
+function Logo({ className = "h-9 w-auto" }: { className?: string }) {
+  return <img src={logoAsset.url} alt="Maestro" className={className} />;
+}
 
 function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      {/* Background brick wall - fixed */}
+      {/* Background brick wall - fixed, large */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center"
         style={{ backgroundImage: `url(${bgAsset.url})` }}
         aria-hidden="true"
       />
-      <div className="fixed inset-0 -z-10 bg-background/85" aria-hidden="true" />
+      <div className="fixed inset-0 -z-10 bg-background/55" aria-hidden="true" />
+      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-background/30 via-transparent to-background" aria-hidden="true" />
 
       {/* NAV */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border">
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
           <a href="#top" className="flex items-center gap-2">
-            <span className="font-display text-3xl tracking-wide text-foreground">MAESTR<span className="text-primary">O</span></span>
+            <Logo className="h-8 w-auto" />
           </a>
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
             <a href="#menu" className="hover:text-primary transition">Tacos</a>
@@ -88,6 +94,7 @@ function Home() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 border border-primary/40 text-primary text-xs font-bold uppercase tracking-wider">
               <Star className="w-3.5 h-3.5 fill-primary" /> 4,4 · 2 300+ avis Google
             </div>
+            <Logo className="mt-6 h-16 md:h-24 w-auto drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)]" />
             <h1 className="mt-6 font-display text-6xl sm:text-7xl md:text-8xl leading-[0.85]">
               LE ROI<br />
               DU <span className="text-stroke-gold">TACOS</span><br />
@@ -115,17 +122,14 @@ function Home() {
 
           {/* Hero image - tacos */}
           <div className="relative">
-            <div className="absolute -inset-8 bg-primary/20 blur-3xl rounded-full" aria-hidden="true" />
+            <div className="absolute -inset-8 bg-primary/25 blur-3xl rounded-full" aria-hidden="true" />
             <img
-              src={tacosMix}
-              alt="Tacos Maestro XXL"
+              src={tacosClassic}
+              alt="Tacos Maestro Classic"
               width={1024}
               height={1024}
-              className="relative w-full h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)]"
+              className="relative w-full h-auto rounded-sm drop-shadow-[0_25px_50px_rgba(0,0,0,0.9)]"
             />
-            <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-4 py-3 font-display text-2xl rotate-[-6deg] shadow-gold">
-              DÈS 7,90 €
-            </div>
           </div>
         </div>
 
@@ -167,15 +171,15 @@ function Home() {
                 </div>
                 <span className="absolute top-3 left-3 px-2.5 py-1 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest">{item.tag}</span>
                 <div className="p-5">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="font-display text-2xl">{item.name}</h3>
-                    <span className="text-primary font-display text-xl">{item.price}</span>
-                  </div>
+                  <h3 className="font-display text-2xl">{item.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
               </article>
             ))}
           </div>
+          <p className="mt-8 text-center text-xs text-muted-foreground uppercase tracking-[0.3em]">
+            Tarifs à venir · Appelez-nous pour commander
+          </p>
         </div>
       </section>
 
@@ -192,15 +196,10 @@ function Home() {
                 <div className="flex-1">
                   <h3 className="font-display text-3xl">{item.name}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
-                  <p className="mt-3 text-primary font-display text-2xl">{item.price}</p>
                 </div>
               </article>
             ))}
           </div>
-
-          <p className="mt-8 text-center text-sm text-muted-foreground">
-            Formule menu : tacos + accompagnement + boisson dès <span className="text-primary font-bold">10,90 €</span>
-          </p>
         </div>
       </section>
 
@@ -208,7 +207,7 @@ function Home() {
       <section id="about" className="relative py-24 border-t border-border">
         <div className="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
           <div className="relative aspect-[4/5] overflow-hidden border-4 border-primary shadow-gold">
-            <img src={tacosBeef} alt="Tacos Maestro" loading="lazy" width={1024} height={1280} className="w-full h-full object-cover" />
+            <img src={tacosBowl} alt="Tacos Bowl Maestro" loading="lazy" width={1024} height={1280} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
               <p className="font-display text-3xl leading-tight">« Les meilleurs tacos de Dunkerque, sans hésiter. »</p>
@@ -276,9 +275,7 @@ function Home() {
 
       {/* FOOTER */}
       <footer className="border-t border-border py-10 text-center text-sm text-muted-foreground bg-background/60 backdrop-blur-sm">
-        <div className="font-display text-3xl tracking-wide text-foreground mb-2">
-          MAESTR<span className="text-primary">O</span>
-        </div>
+        <Logo className="h-10 w-auto mx-auto mb-4" />
         <p className="font-display text-xs tracking-[0.3em] text-primary mb-4">LE CHEF C'EST VOUS !</p>
         <p>© {new Date().getFullYear()} Maestro Dunkerque · 1 Pl. de la Gare, 59140 Dunkerque · 03 28 25 41 48</p>
       </footer>
