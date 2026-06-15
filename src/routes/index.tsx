@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import bgAsset from "@/assets/maestro-bg.png.asset.json";
-import logoAsset from "@/assets/maestro-logo-v2.png.asset.json";
+import logoAsset from "@/assets/maestro-logo-exact.png.asset.json";
 import tacosClassic from "@/assets/tacos-classic-real.jpg";
-import tacosChickenAsset from "@/assets/tacos-chicken-real.png.asset.json";
+import tacosChicken from "@/assets/tacos-chicken-real.jpg";
 import tacosBowl from "@/assets/tacos-bowl-real.jpg";
 import tacosXXL from "@/assets/tacos-xxl-real.jpg";
 import cheesyFries from "@/assets/cheesy-fries-real.jpg";
